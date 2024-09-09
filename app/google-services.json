@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "919163301950",
+    "firebase_url": "https://kingteca-c5900-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "kingteca-c5900",
+    "storage_bucket": "kingteca-c5900.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:919163301950:android:a34c3ff330492cc77f216f",
+        "android_client_info": {
+          "package_name": "com.gaby.kingoteka"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDM-VHMHVJRX99GO7tRwjQT_OUWx3X8Ip8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
