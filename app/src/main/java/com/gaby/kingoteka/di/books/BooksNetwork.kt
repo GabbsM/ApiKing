@@ -1,6 +1,6 @@
-package com.gaby.kingoteka.di
+package com.gaby.kingoteka.di.books
 
-import com.gaby.kingoteka.ApiService
+import com.gaby.kingoteka.data.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -10,7 +10,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
-import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManager
@@ -18,7 +17,7 @@ import javax.net.ssl.X509TrustManager
 
 @Module
 @InstallIn(SingletonComponent::class)
-object Network {
+object BooksNetwork {
 
     @Singleton
     @Provides

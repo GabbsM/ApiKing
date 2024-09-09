@@ -1,6 +1,6 @@
-package com.gaby.kingoteka.data
+package com.gaby.kingoteka.data.books
 
-import com.gaby.kingoteka.domain.model.BookModel
+import com.gaby.kingoteka.domain.models.BookModel
 import com.google.gson.annotations.SerializedName
 
 data class ResponseWrapper(

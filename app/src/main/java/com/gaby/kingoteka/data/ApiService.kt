@@ -1,7 +1,6 @@
-package com.gaby.kingoteka
+package com.gaby.kingoteka.data
 
-import com.gaby.kingoteka.data.BookResponse
-import com.gaby.kingoteka.data.ResponseWrapper
+import com.gaby.kingoteka.data.books.BookResponse
 import retrofit2.http.GET
 
 interface ApiService {

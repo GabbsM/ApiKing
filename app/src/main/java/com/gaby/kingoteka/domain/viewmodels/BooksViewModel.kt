@@ -1,23 +1,19 @@
-package com.gaby.kingoteka.domain.model
+package com.gaby.kingoteka.domain.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.gaby.kingoteka.data.KingRepository
-import dagger.hilt.android.AndroidEntryPoint
+import com.gaby.kingoteka.data.books.BooksRepository
+import com.gaby.kingoteka.domain.models.BookModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class KingViewModel @Inject constructor(
-    private val repository: KingRepository
+class BooksViewModel @Inject constructor(
+    private val repository: BooksRepository
 ) : ViewModel() {
 
     private val _libro = MutableStateFlow<List<BookModel>>(emptyList())

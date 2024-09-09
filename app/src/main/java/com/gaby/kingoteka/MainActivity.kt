@@ -1,26 +1,26 @@
 package com.gaby.kingoteka
 
-import KingScreen
+import com.gaby.kingoteka.domain.screens.BooksScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import com.gaby.kingoteka.domain.model.KingViewModel
-import com.gaby.kingoteka.ui.theme.KingOTekaTheme
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.compose.rememberNavController
+import com.gaby.kingoteka.domain.viewmodels.BooksViewModel
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val navController = rememberNavController()
+            val viewModel = hiltViewModel<BooksViewModel>()
             MaterialTheme {
                 Surface {
-                    KingScreen()
+                    BooksScreen(navController = navController, viewModel = viewModel)
                 }
             }
         }

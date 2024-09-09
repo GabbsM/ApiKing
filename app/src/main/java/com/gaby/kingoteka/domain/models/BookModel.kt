@@ -1,4 +1,4 @@
-package com.gaby.kingoteka.domain.model
+package com.gaby.kingoteka.domain.models
 
 data class BookModel(
     val año: Int,

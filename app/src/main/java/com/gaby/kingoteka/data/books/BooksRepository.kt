@@ -1,11 +1,11 @@
-package com.gaby.kingoteka.data
+package com.gaby.kingoteka.data.books
 
 import android.util.Log
-import com.gaby.kingoteka.ApiService
-import com.gaby.kingoteka.domain.model.BookModel
+import com.gaby.kingoteka.data.ApiService
+import com.gaby.kingoteka.domain.models.BookModel
 import javax.inject.Inject
 
-class KingRepository @Inject constructor(private val apiService: ApiService) {
+class BooksRepository @Inject constructor(private val apiService: ApiService) {
 
     suspend fun getBooks(): List<BookModel> {
         val response = apiService.getAllBooks()
