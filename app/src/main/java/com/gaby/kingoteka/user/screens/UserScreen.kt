@@ -1,4 +1,4 @@
-package com.gaby.kingoteka.domain.screens
+package com.gaby.kingoteka.user.screens
 
 import androidx.compose.runtime.Composable
 

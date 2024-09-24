@@ -83,6 +83,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    val paging_version = "3.3.2"
+    implementation("androidx.paging:paging-runtime:$paging_version")
+
 
     implementation(libs.dagger.hilt)
     implementation(libs.dagger.hilt.navigation)
@@ -93,6 +96,7 @@ dependencies {
 
     implementation(libs.retrofit2.retrofit)
     implementation(libs.converter.gson)
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

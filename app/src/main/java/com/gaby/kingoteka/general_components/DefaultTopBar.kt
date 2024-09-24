@@ -1,4 +1,4 @@
-package com.gaby.kingoteka.domain.components
+package com.gaby.kingoteka.general_components
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
@@ -35,13 +35,13 @@ fun DefaultTopBar(
             Text(
                 text = "KinOTeca Logo",
                 fontSize = 20.sp,
-                color = Color.Gray,
+                color = Color.White,
                 fontWeight = FontWeight.ExtraBold
             )
         },
 
         colors = TopAppBarDefaults.smallTopAppBarColors(
-            containerColor = Color.White
+            containerColor = Color(0xFF7626E9)
         ),
 
         actions = {
@@ -49,7 +49,7 @@ fun DefaultTopBar(
                 Icon(
                     imageVector = Icons.Default.Settings,
                     "",
-                    tint = Color.Black
+                    tint = Color.White
                 )
             }
         }

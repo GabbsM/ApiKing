@@ -1,7 +1,7 @@
-package com.gaby.kingoteka.domain.models
+package com.gaby.kingoteka.books.domain.models
 
 data class BookModel(
-    val año: Int,
+    val anio: Int,
     val genero: String,
     val notas: String,
     val paginas: Int,
