@@ -14,6 +14,7 @@ import com.gaby.kingoteka.books.domain.content.BooksContent
 import com.gaby.kingoteka.books.domain.viewmodels.BooksViewModel
 import com.gaby.kingoteka.general_components.BottomBar
 import com.gaby.kingoteka.general_components.DefaultTopBar
+import com.gaby.kingoteka.movies.domain.content.MoviesContent
 import com.gaby.kingoteka.movies.domain.viewmodels.MovieViewModel
 
 @Composable
@@ -29,7 +30,7 @@ fun MovieScreen(navController: NavHostController, viewModel: MovieViewModel) {
     }, content = { paddingValues ->
         Column {
             Spacer(modifier = Modifier.height(56.dp))
-            BooksContent(
+            MoviesContent(
                 paddingValues = paddingValues,
                 navHostController = navController,
                 viewModel = hiltViewModel()

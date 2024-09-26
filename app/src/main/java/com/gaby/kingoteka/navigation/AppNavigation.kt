@@ -11,12 +11,18 @@ import com.gaby.kingoteka.search.screens.SearchScreen
 import com.gaby.kingoteka.stephenVerse.screens.StephenVerseScreen
 import com.gaby.kingoteka.user.screens.UserScreen
 import com.gaby.kingoteka.books.domain.viewmodels.BookDetailsViewModel
+import com.gaby.kingoteka.movies.domain.screens.MovieDetailsScreen
+import com.gaby.kingoteka.movies.domain.screens.MovieScreen
+import com.gaby.kingoteka.movies.domain.viewmodels.MovieDetailsViewModel
 
 @Composable
 fun AppNavigation(navController: NavHostController) {
     NavHost(navController = navController, startDestination = "books") {
         composable("books") {
             BooksScreen(navController, viewModel = hiltViewModel())
+        }
+        composable("movies"){
+            MovieScreen(navController, viewModel = hiltViewModel())
         }
         composable("search") {
             SearchScreen()
@@ -26,6 +32,21 @@ fun AppNavigation(navController: NavHostController) {
         }
         composable("user") {
             UserScreen()
+        }
+
+        composable(AppScreen.MovieDetails.route + "/{id}") { backStackEntry ->
+            val movieId = backStackEntry.arguments?.getString("id")?.toIntOrNull()
+            if (movieId != null) {
+                val viewModel: MovieDetailsViewModel = hiltViewModel()
+                viewModel.fetchMovieDetails(movieId)
+                MovieDetailsScreen(
+                    navController = navController,
+                    movieId = movieId,
+                    viewModel = viewModel
+                )
+            } else {
+                //TODO
+            }
         }
         composable(AppScreen.BookDetails.route + "/{id}") { backStackEntry ->
             val bookId = backStackEntry.arguments?.getString("id")?.toIntOrNull()
@@ -38,7 +59,7 @@ fun AppNavigation(navController: NavHostController) {
                     viewModel = viewModel
                 )
             } else {
-                // Handle the case where bookId is not a valid number
+                //TODO
             }
         }
     }
