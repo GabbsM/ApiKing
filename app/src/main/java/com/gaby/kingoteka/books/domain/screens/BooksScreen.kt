@@ -8,17 +8,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.gaby.kingoteka.general_components.BottomBar
 import com.gaby.kingoteka.general_components.DefaultTopBar
 import com.gaby.kingoteka.books.domain.content.BooksContent
 import com.gaby.kingoteka.books.domain.viewmodels.BooksViewModel
+import com.gaby.kingoteka.general_components.SharedViewModel
 
 
 @Composable
-fun BooksScreen(navController: NavHostController, viewModel: BooksViewModel) {
-
+fun BooksScreen(navController: NavHostController,
+                viewModel: BooksViewModel,
+                sharedViewModel: SharedViewModel) {
     Scaffold(topBar = {
         DefaultTopBar(
             title = "King Universe",
@@ -32,7 +33,8 @@ fun BooksScreen(navController: NavHostController, viewModel: BooksViewModel) {
             BooksContent(
                 paddingValues = paddingValues,
                 navHostController = navController,
-                viewModel = hiltViewModel()
+                viewModel = viewModel,
+                sharedViewModel = sharedViewModel
             )
         }
     }, bottomBar = { BottomBar(navController) })

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">KingOTeka</string>
+    <string name="book_status_pending">Pendiente</string>
+    <string name="book_status_reading">Leyendo</string>
+    <string name="book_status_read">Leído</string>
+    <string name="book_image_not_available">imagen no disponible</string>
 </resources>

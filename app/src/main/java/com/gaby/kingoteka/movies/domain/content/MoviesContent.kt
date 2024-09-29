@@ -30,7 +30,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
 import com.gaby.kingoteka.books.domain.content.StarRatingBar
-import com.gaby.kingoteka.books.domain.viewmodels.BooksViewModel
 import com.gaby.kingoteka.general_components.SharedViewModel
 import com.gaby.kingoteka.movies.domain.viewmodels.MovieViewModel
 import com.gaby.kingoteka.navigation.AppScreen
@@ -43,7 +42,7 @@ fun MoviesContent(
     sharedViewModel: SharedViewModel = hiltViewModel()
 ) {
     val movie by viewModel.movie.collectAsState()
-    val selectedOptions by sharedViewModel.selectedOptions.collectAsState()
+    val selectedOptions by sharedViewModel.bookStatuses.collectAsState()
     val ratings by sharedViewModel.ratings.collectAsState()
 
     // Agrega un log para verificar si movie está vacío

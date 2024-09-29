@@ -11,15 +11,19 @@ import com.gaby.kingoteka.search.screens.SearchScreen
 import com.gaby.kingoteka.stephenVerse.screens.StephenVerseScreen
 import com.gaby.kingoteka.user.screens.UserScreen
 import com.gaby.kingoteka.books.domain.viewmodels.BookDetailsViewModel
+import com.gaby.kingoteka.books.domain.viewmodels.BooksViewModel
+import com.gaby.kingoteka.general_components.SharedViewModel
 import com.gaby.kingoteka.movies.domain.screens.MovieDetailsScreen
 import com.gaby.kingoteka.movies.domain.screens.MovieScreen
 import com.gaby.kingoteka.movies.domain.viewmodels.MovieDetailsViewModel
 
 @Composable
 fun AppNavigation(navController: NavHostController) {
+    val viewModel: BooksViewModel = hiltViewModel<BooksViewModel>()
+    val sharedViewModel: SharedViewModel = hiltViewModel<SharedViewModel>()
     NavHost(navController = navController, startDestination = "books") {
         composable("books") {
-            BooksScreen(navController, viewModel = hiltViewModel())
+            BooksScreen(navController, viewModel = viewModel, sharedViewModel = sharedViewModel)
         }
         composable("movies"){
             MovieScreen(navController, viewModel = hiltViewModel())
@@ -56,7 +60,8 @@ fun AppNavigation(navController: NavHostController) {
                 BookDetailsScreen(
                     navController = navController,
                     bookId = bookId,
-                    viewModel = viewModel
+                    viewModel = viewModel,
+                    sharedViewModel = sharedViewModel
                 )
             } else {
                 //TODO
