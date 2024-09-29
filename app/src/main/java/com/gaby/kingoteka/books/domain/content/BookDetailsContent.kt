@@ -34,10 +34,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.gaby.kingoteka.R
 import com.gaby.kingoteka.books.domain.models.BookModelDetail
 import com.gaby.kingoteka.general_components.CardBook
 import com.gaby.kingoteka.general_components.SharedViewModel
@@ -54,11 +56,11 @@ fun BookDetailsContent(
         return
     }
 
-    val selectedOption by sharedViewModel.selectedOptions.collectAsState()
-    val rating by sharedViewModel.ratings.collectAsState()
+    val bookStatuses by sharedViewModel.bookStatuses.collectAsState()
+    val ratings by sharedViewModel.ratings.collectAsState()
 
-    val currentSelectedOption = selectedOption[bookSelected.id.toString()] ?: "Pendiente"
-    val currentRating = rating[bookSelected.id.toString()] ?: 1f
+    val currentBookStatus = bookStatuses[bookSelected.id.toString()] ?: stringResource(R.string.book_status_pending)
+    val currentRating = ratings[bookSelected.id.toString()] ?: 0f
 
     Column(
         modifier = Modifier.padding(16.dp).fillMaxWidth().verticalScroll(rememberScrollState())
@@ -108,10 +110,10 @@ fun BookDetailsContent(
             modifier = Modifier.align(Alignment.CenterHorizontally)
         )
 
-        DropdownMenuExample(
+        BookStatusSelector(
             bookId = bookSelected.id.toString(),
             sharedViewModel = sharedViewModel,
-            selectedOption = currentSelectedOption
+            selectedOption = currentBookStatus
         )
         Spacer(modifier = Modifier.height(10.dp))
         Text(
@@ -163,14 +165,18 @@ fun BookDetailsContent(
 }
 
 @Composable
-fun DropdownMenuExample(bookId: String, sharedViewModel: SharedViewModel, selectedOption: String) {
-    val options = listOf("Pendiente", "Leyendo", "Leído")
+fun BookStatusSelector(bookId: String, sharedViewModel: SharedViewModel, selectedOption: String) {
+    val options = listOf(
+        stringResource(R.string.book_status_pending),
+        stringResource(R.string.book_status_reading),
+        stringResource(R.string.book_status_read)
+    )
     var expanded by remember { mutableStateOf(false) }
 
     val backgroundColor = when (selectedOption) {
-        "Pendiente" -> Color(0xFF7626E9)
-        "Leyendo" -> Color(0xFF26E99F)
-        "Leído" -> Color(0xFFFFA500)
+        stringResource(R.string.book_status_pending) -> Color(0xFF7626E9)
+        stringResource(R.string.book_status_reading) -> Color(0xFF26E99F)
+        stringResource(R.string.book_status_read) -> Color(0xFFFFA500)
         else -> Color.Gray
     }
 
@@ -190,7 +196,7 @@ fun DropdownMenuExample(bookId: String, sharedViewModel: SharedViewModel, select
         DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             options.forEach { option ->
                 DropdownMenuItem(text = { Text(text = option) }, onClick = {
-                    sharedViewModel.updateSelectedOption(bookId, option)
+                    sharedViewModel.updateBookStatus(bookId, option)
                     expanded = false
                 })
             }
@@ -201,7 +207,11 @@ fun DropdownMenuExample(bookId: String, sharedViewModel: SharedViewModel, select
 
 @Composable
 fun StarRatingBar(
-    bookId: String, initialRating: Float, sharedViewModel: SharedViewModel, maxStars: Int = 5
+    bookId: String,
+    initialRating: Float,
+    sharedViewModel: SharedViewModel,
+    maxStars: Int = 5,
+    readOnly: Boolean = false
 ) {
     var rating by remember { mutableStateOf(initialRating) }
     val density = LocalDensity.current.density
@@ -219,10 +229,12 @@ fun StarRatingBar(
             Icon(imageVector = icon,
                 contentDescription = null,
                 tint = iconTintColor,
-                modifier = Modifier.selectable(selected = isSelected, onClick = {
-                    rating = i.toFloat()
-                    sharedViewModel.updateRating(bookId, rating)
-                }).width(starSize).height(starSize)
+                modifier = if (readOnly) Modifier else Modifier.selectable(
+                    selected = isSelected,
+                    onClick = {
+                        rating = i.toFloat()
+                        sharedViewModel.updateRating(bookId, rating)
+                    }).width(starSize).height(starSize)
             )
 
             if (i < maxStars) {
@@ -231,5 +243,3 @@ fun StarRatingBar(
         }
     }
 }
-
-

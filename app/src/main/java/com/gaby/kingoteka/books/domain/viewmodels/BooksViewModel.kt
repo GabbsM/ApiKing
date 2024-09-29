@@ -13,8 +13,8 @@ import javax.inject.Inject
 @HiltViewModel
 class BooksViewModel @Inject constructor(private val repository: BooksRepository) : ViewModel() {
 
-    private val _libro = MutableStateFlow<List<BookModelDetail>>(emptyList())
-    val libro: StateFlow<List<BookModelDetail>> = _libro
+    private val _libros = MutableStateFlow<List<BookModelDetail>>(emptyList())
+    val libros: StateFlow<List<BookModelDetail>> = _libros
 
     init {
         fetchBooks()
@@ -24,7 +24,7 @@ class BooksViewModel @Inject constructor(private val repository: BooksRepository
         viewModelScope.launch {
             val books = repository.getBooksByYear()
             if (books != null) {
-                _libro.value = books
+                _libros.value = books
             } else {
                 // Handle error case
             }

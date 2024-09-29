@@ -22,12 +22,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.rememberAsyncImagePainter
+import com.gaby.kingoteka.R
 import com.gaby.kingoteka.general_components.SharedViewModel
 import com.gaby.kingoteka.books.domain.viewmodels.BooksViewModel
 import com.gaby.kingoteka.navigation.AppScreen
@@ -36,34 +37,40 @@ import com.gaby.kingoteka.navigation.AppScreen
 fun BooksContent(
     paddingValues: PaddingValues,
     navHostController: NavHostController,
-    viewModel: BooksViewModel = hiltViewModel(),
-    sharedViewModel: SharedViewModel = hiltViewModel()
+    viewModel: BooksViewModel,
+    sharedViewModel: SharedViewModel
 ) {
-    val libro by viewModel.libro.collectAsState()
-    val selectedOptions by sharedViewModel.selectedOptions.collectAsState()
+    val libros by viewModel.libros.collectAsState()
+    val bookStatuses by sharedViewModel.bookStatuses.collectAsState()
     val ratings by sharedViewModel.ratings.collectAsState()
 
     Box(
-        modifier = Modifier.fillMaxSize().background(Color.White)
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White)
     ) {
         LazyColumn(modifier = Modifier.align(Alignment.Center)) {
-            items(libro) { item ->
-                val selectedOption = selectedOptions[item.id.toString()] ?: "Pendiente"
+            items(libros) { item ->
+                val selectedOption = bookStatuses[item.id.toString()] ?: stringResource(R.string.book_status_pending)
                 val rating = ratings[item.id.toString()] ?: 1f
                 val textColor = when (selectedOption) {
-                    "Pendiente" -> Color(0xFF7626E9)
-                    "Leyendo" -> Color(0xFF26E99F)
-                    "Leído" -> Color(0xFFFFA500)
+                    stringResource(R.string.book_status_pending) -> Color(0xFF7626E9)
+                    stringResource(R.string.book_status_reading) -> Color(0xFF26E99F)
+                    stringResource(R.string.book_status_read) -> Color(0xFFFFA500)
                     else -> Color.Gray
                 }
 
                 Row(
-                    modifier = Modifier.padding(16.dp).background(Color.White)
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .background(Color.White)
                 ) {
                     Image(
                         painter = rememberAsyncImagePainter(item.url_image),
-                        contentDescription = "imagen no disponible",
-                        modifier = Modifier.height(150.dp).align(Alignment.CenterVertically)
+                        contentDescription = stringResource(R.string.book_image_not_available),
+                        modifier = Modifier
+                            .height(150.dp)
+                            .align(Alignment.CenterVertically)
                             .clickable(onClick = {
                                 navHostController.navigate(AppScreen.BookDetails.route + "/${item.id}")
                             })
@@ -99,7 +106,8 @@ fun BooksContent(
                         StarRatingBar(
                             bookId = item.id.toString(),
                             initialRating = rating,
-                            sharedViewModel = sharedViewModel
+                            sharedViewModel = sharedViewModel,
+                            readOnly = true
                         )
                     }
                 }

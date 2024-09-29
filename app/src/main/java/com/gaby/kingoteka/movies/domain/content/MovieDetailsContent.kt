@@ -52,7 +52,7 @@ fun MovieDetailsContent(
         return
     }
 
-    val selectedOption by sharedViewModel.selectedOptions.collectAsState()
+    val selectedOption by sharedViewModel.bookStatuses.collectAsState()
     val rating by sharedViewModel.ratings.collectAsState()
 
     val currentSelectedOption = selectedOption[movieSelected.id.toString()] ?: "Pendiente"
@@ -170,7 +170,7 @@ fun DropdownMenuExample(bookId: String, sharedViewModel: SharedViewModel, select
         DropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
             options.forEach { option ->
                 DropdownMenuItem(text = { Text(text = option) }, onClick = {
-                    sharedViewModel.updateSelectedOption(bookId, option)
+                    sharedViewModel.updateBookStatus(bookId, option)
                     expanded = false
                 })
             }
