@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.android.application) version "8.7.0"
+    alias(libs.plugins.jetbrains.kotlin.android) version "1.9.22"
     kotlin("kapt")
     alias(libs.plugins.hilt)
     alias(libs.plugins.googleServices)
@@ -53,7 +53,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.10"
     }
     packaging {
         resources {
